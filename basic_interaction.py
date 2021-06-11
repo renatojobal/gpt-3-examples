@@ -24,32 +24,31 @@ You can exit typing ^C. (Command + C), (Ctrl + C)
 
 print(salute, end="")
 
+while True:
 
-nex_input = input(human_name+": ")
-actual_promt = salute + human_name + ": " + nex_input + "\n" + bot_name + ":"
-print(bot_name + ":", end="")
-
-
-
-response = openai.Completion.create(
-            engine="davinci",
-            temperature=0.9,
-            max_tokens=190,
-            top_p=1,
-            prompt = actual_promt,
-            frequency_penalty=0,
-            presence_penalty=0.6,
-            stop=["\n", "Human:", "AI:"]
-        )
+    nex_input = input(human_name+": ")
+    actual_promt = salute + human_name + ": " + nex_input + "\n" + bot_name + ":"
+    print(bot_name + ":", end="")
 
 
-ai_response = response.choices[0].text
-print(ai_response)
 
-# Update promt
-actual_promt += ai_response
+    response = openai.Completion.create(
+                engine="davinci",
+                temperature=0.9,
+                max_tokens=190,
+                top_p=1,
+                prompt = actual_promt,
+                frequency_penalty=0,
+                presence_penalty=0.6,
+                stop=["\n", "Human:", "AI:"]
+            )
 
-print("Actual promt")
-print(actual_promt)
+
+    ai_response = response.choices[0].text
+    print(ai_response)
+
+    # Update promt
+    actual_promt += ai_response
+
 
 
